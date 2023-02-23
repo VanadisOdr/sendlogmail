@@ -13,11 +13,10 @@ server = 'smtp.mail.ru'
 user = 'olegsendtest@mail.ru'
 password = os.getenv('PASSWORD')
 
-recipients = ['oleggnedov@mail.ru']
-sender = 'olegsendtest@mail.ru'
+recipients = os.getenv('MAIL')
+sender = os.getenv('MAIL2')
 subject = 'sendmailtest'
-text = 'Текст сообщения sdf sdf sdf sdaf <b>sdaf sdf</b> fg hsdgh <h1>f sd</h1> dfhjhgs sd gsdfg sdf'
-html = '<html><head></head><body><p>' + text + '</p></body></html>'
+
 
 filepath = "debug.log"
 basename = os.path.basename(filepath)
@@ -31,16 +30,12 @@ msg['Reply-To'] = sender
 msg['Return-Path'] = sender
 msg['X-Mailer'] = 'Python/' + (python_version())
 
-part_text = MIMEText(text, 'plain')
-part_html = MIMEText(html, 'html')
 part_file = MIMEBase('application', 'octet-stream; name="{}"'.format(basename))
 part_file.set_payload(open(filepath, "rb").read())
 part_file.add_header('Content-Description', basename)
 part_file.add_header('Content-Disposition', 'attachment; filename="{}"; size={}'.format(basename, filesize))
 encoders.encode_base64(part_file)
 
-msg.attach(part_text)
-msg.attach(part_html)
 msg.attach(part_file)
 
 mail = smtplib.SMTP_SSL(server)
