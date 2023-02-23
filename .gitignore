@@ -1,2 +1,5 @@
+venv
+.idea
 *.pdf
 *.log
+.env
