@@ -13,10 +13,7 @@ server = 'smtp.mail.ru'
 user = 'olegsendtest@mail.ru'
 password = os.getenv('PASSWORD')
 
-recipients = os.getenv('MAIL')
-sender = os.getenv('MAIL2')
 subject = 'sendmailtest'
-
 
 filepath = "debug.log"
 basename = os.path.basename(filepath)
@@ -24,11 +21,11 @@ filesize = os.path.getsize(filepath)
 
 msg = MIMEMultipart('alternative')
 msg['Subject'] = subject
-msg['From'] = 'Python script <' + sender + '>'
-msg['To'] = ''.join(recipients)
-msg['Reply-To'] = sender
-msg['Return-Path'] = sender
-msg['X-Mailer'] = 'Python/' + (python_version())
+msg['From'] = os.getenv('MAIL2')
+msg['To'] = os.getenv('MAIL')
+msg['Reply-To'] = os.getenv('MAIL2')
+msg['Return-Path'] = os.getenv('MAIL2')
+
 
 part_file = MIMEBase('application', 'octet-stream; name="{}"'.format(basename))
 part_file.set_payload(open(filepath, "rb").read())
@@ -40,5 +37,5 @@ msg.attach(part_file)
 
 mail = smtplib.SMTP_SSL(server)
 mail.login(user, password)
-mail.sendmail(sender, recipients, msg.as_string())
+mail.sendmail(os.getenv('MAIL2'), os.getenv('MAIL'), msg.as_string())
 mail.quit()

@@ -2,3 +2,5 @@ colorama==0.4.6
 loguru==0.6.0
 python-dotenv==0.21.1
 win32-setctime==1.1.0
+
+config~=0.5.1
