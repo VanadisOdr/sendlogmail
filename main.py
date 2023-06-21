@@ -21,6 +21,7 @@ except Exception as err:
 
 load_dotenv()
 
+
 params_mail = {
     "from": os.getenv('MAIL2'),
     "to": os.getenv('MAIL'),
@@ -30,12 +31,12 @@ params_mail = {
     "tls": True,
     "subject": "loguru",
     "username": os.getenv('MAIL2'),
-    "password": os.getenv('PASSWORD')
+    "password": os.getenv('PASSWORD'),
 }
 # Send a single notification
 
-notifiers.get_notifier("email").notify(message="The application is running!", raise_on_errors=True, **params_mail)
+notifiers.get_notifier("email").notify(message='The app is running!',attachments=['C:/Users/olegg/PycharmProjects/sendlogmail/debug.log'], raise_on_errors=True, **params_mail)
 
 from notifiers.logging import NotificationHandler
-handler = NotificationHandler(provider='email', defaults=params_mail)
+handler = NotificationHandler(provider='email', defaults=params_mail, )
 logger.add(handler, level="ERROR")
