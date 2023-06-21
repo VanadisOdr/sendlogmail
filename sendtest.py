@@ -10,7 +10,7 @@ params_mail = {
         "from": os.getenv('MAIL2'),
         "to": os.getenv('MAIL'),
         "host": "smtp.mail.ru",
-        "port": 578,
+        "port": 465,
         "subject": "loguru",
         "username": os.getenv('MAIL2'),
         "password": os.getenv('PASSWORD')
