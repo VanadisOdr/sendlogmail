@@ -21,7 +21,7 @@ except Exception as err:
 
 load_dotenv()
 
-
+#параметры почты для маила ссл тлс и порт(465) обязательно такие
 params_mail = {
     "from": os.getenv('MAIL2'),
     "to": os.getenv('MAIL'),
@@ -33,7 +33,8 @@ params_mail = {
     "username": os.getenv('MAIL2'),
     "password": os.getenv('PASSWORD'),
 }
-# Send a single notification
+# Отправляем уведомление
+#attachment=(нужный для отправки файл)
 
 notifiers.get_notifier("email").notify(message='The app is running!',attachments=['C:/Users/olegg/PycharmProjects/sendlogmail/debug.log'], raise_on_errors=True, **params_mail)
 
