@@ -13,6 +13,7 @@ logger.add('debug.log', format='{time} {level} {message}',
 def sym(num1, num2):
     return num1 / num2
 
+mails = [os.getenv('MAIL'),os.getenv('MAKSON')]
 
 try:
     sym(1, 0)
@@ -31,13 +32,13 @@ params_mail = {
     "tls": True,
     "subject": "loguru",
     "username": os.getenv('MAIL2'),
-    "password": os.getenv('PASSWORD'),
+    "password": os.getenv('PASSWORD')
 }
 # Отправляем уведомление
 #attachment=(нужный для отправки файл)
 
-notifiers.get_notifier("email").notify(message='The app is running!',attachments=['C:/Users/olegg/PycharmProjects/sendlogmail/debug.log'], raise_on_errors=True, **params_mail)
+notifiers.get_notifier("email").notify(message='An error has occured!',attachments=['C:/Users/olegg/PycharmProjects/sendlogmail/debug.log'], raise_on_errors=True, **params_mail)
 
-from notifiers.logging import NotificationHandler
-handler = NotificationHandler(provider='email', defaults=params_mail, )
-logger.add(handler, level="ERROR")
+# from notifiers.logging import NotificationHandler
+# handler = NotificationHandler(provider='email', defaults=params_mail)
+# logger.add(handler, level="ERROR")
